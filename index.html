@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/breakpoints.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+
+        <h2>Where in the world?</h2>
+        <div class="swicth">
+            <input type="checkbox" class="swicth__checkbox" id="check">
+            <label for="check">
+                <div class="checkbox__button">
+                    <i class="fa-solid fa-sun button__icon"></i>
+                    <div class="button__circle"></div>
+                    <i class="fa-solid fa-moon button__icon"></i>
+                </div>
+            </label>  
+        </div>
+
+    </header>
+    <main>
+
+        <section class="filter">
+            <div class="filter__search">
+                <div class="search__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <input type="text" id="search" class="search__input" placeholder="Pesquise por um país...">
+            </div>
+            <div class="filter__select">
+                <div class="select__menu" id="select">
+                    <span>Filter by Region</span>
+                    <span><img src="arrow-bottom-4.png" class="menu__img"></span>
+                </div>
+                <ul class="select__regions" id="options">
+                    <li>Africa</li>
+                    <li>Americas</li>
+                    <li>Asia</li>
+                    <li>Europe</li>
+                    <li>Oceania</li>
+                </ul>
+            </div>
+        </section>
+        <section class="cards">
+        </section>
+
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

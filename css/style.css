@@ -1,0 +1,345 @@
+:root{
+    --themeButtonBackColor:#dfdcdc;
+    --buttonCircleColor:white;
+    --iconsColor:#b8a2a2;
+    --headerColor:hsl(0, 0%, 100%);
+    --bodyColor:hsl(0, 0%, 98%);
+    --fontColor:black;
+    --arrowColor:invert(0%);
+    --fontInforColor:hsl(209, 23%, 22%);
+
+    &.Dark-Mode{
+        --themeButtonBackColor:hsl(210, 26%, 13%);
+        --buttonCircleColor:hsl(208, 21%, 36%);
+        --headerColor:hsl(209, 23%, 22%);
+        --bodyColor:hsl(207, 26%, 17%);
+        --fontColor:white;
+        --arrowColor:invert(100%);
+        --fontInforColor:hsl(0, 0%, 98%);
+    }
+}   
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+html,body{
+    font-family: "Nunito Sans";
+    color:var(--fontColor);
+    min-height: 100vh;
+}
+
+body{
+    background-color: var(--bodyColor);
+    transition:background-color .5s;
+}
+
+header{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background-color:var(--headerColor);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    transition: .5s;
+
+    & h2{
+        font-weight: 900;
+    }
+}
+
+main{
+    width: 100%;
+    padding: 40px 5%;
+    transition:background-color .5s;
+} 
+
+.swicth__checkbox{
+    position: absolute;
+    bottom: 999999999px;
+    display: inline-block;
+}
+
+.checkbox__button{
+    width: 70px;
+    height: 31px;
+    background-color: var(--themeButtonBackColor);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: .5s;
+    cursor: pointer;
+
+    & .button__circle{
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: var(--buttonCircleColor);
+        margin: 0 2px;
+        transition: .5s;
+    
+        &.changeMode{
+            transform: translate(38px,0);
+        }
+    }
+
+    & .button__icon{
+        position: absolute;
+        z-index: 1;
+        color:var(--iconsColor);
+        &:nth-of-type(1){
+            left: 8px;
+        }
+        &:nth-of-type(2){
+            right: 9px;
+        }
+    }
+}
+
+.filter{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+
+    & .filter__search{
+        width: 450px;
+        max-width: 90vw;
+        height: 50px;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        background-color:var(--headerColor);
+        transition: .5s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        & .search__icon{
+            cursor: pointer;
+            width: 17%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fontColor);
+            font-size: 18px;
+            transition: .5s;
+        }
+    
+        & .search__input{
+            border: 0px;
+            width: 90%;
+            height: 100%;
+            background-color:var(--headerColor);
+            border-radius:0 5px 5px 0;
+            font-family: "Nunito Sans";
+            color: var(--fontColor);
+            transition: .5s;
+            padding-right: 5%;
+        }    
+    }
+}
+
+:is(.select__menu,.select__regions){
+    width: 200px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--headerColor);
+}
+
+.filter__select{
+    position: absolute;
+    right: 0;
+
+    & .select__menu{
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+        transition-duration: .5s;
+
+        & .menu__img{
+            width: 20px;
+            margin-top: 5px;
+            transition: transform .3s, filter .5s;
+            filter: var(--arrowColor);
+
+            &.spin{
+                transform: rotate(180deg);
+            }
+        }
+    }
+    
+    & .select__regions{
+        margin-top: 5px;
+        list-style: none;
+        height: 0;
+        transition:.5s;
+        overflow: hidden;
+        
+        & > li{
+            padding: 10px 20px;
+            border-radius: 5px;
+    
+            &:hover{
+                background-color: var(--themeButtonBackColor);
+            }
+    
+            &.marker{
+                background-color: var(--themeButtonBackColor);
+            }
+        }
+        &.on{
+            padding: 6px 5px;
+            transition: .3s;
+            height: 220px;
+
+        }
+    }
+}
+
+:is(.select__menu,.select__regions){
+    right: 0;
+}
+
+.cards{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5%;
+
+    & .cards__country{
+        margin-top: 60px;
+        width:270px;
+        height:350px;
+        text-decoration: none;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: var(--headerColor);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        transition: .5s;
+        
+        & .country__flag{
+            width: 100%;
+            height: 45%;
+            object-fit: cover;
+        }
+    
+        & .country__infor{
+            padding: 25px;
+            color: var(--fontColor);
+            transition: .5s;
+    
+            & ul{
+                margin-top: 10px;
+            }
+    
+                & .infor__item{
+                    margin-bottom: 5px;
+                    list-style: none;
+    
+                    & span{
+                        color: var(--fontInforColor);
+                        transition: .5s;
+                    } 
+                        
+                }
+        }
+    }
+    
+}
+
+/* Estilos para a página de informações dos países */
+
+.btn-back{
+    color: var(--fontColor);
+    text-decoration: none;
+    background: var(--headerColor);
+    width: 120px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    transition: .5s;
+}
+
+.country-infor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+
+    & .country-infor__flag{
+        text-align: center;
+
+        & img{
+            width: 96%;
+            max-width: 450px;
+        }
+    }
+
+    & .country-infor__content{
+        margin-top: 30px;
+        transition: .5s;
+
+        & h2{
+            font-size: 30px;
+        }
+        & .content__list{
+            margin-top: 15px;
+            display: flex; 
+            flex-direction: column;
+            gap: 35px;
+
+            & ul{
+                list-style: none;
+
+                & li{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        & .content__borders{
+            margin-top: 35px;
+
+            & ul{
+                display: flex;
+                justify-content: space-evenly;                
+                flex-wrap: wrap;
+                margin-top: 20px;
+                width: 100%;
+                gap: 10px;
+                list-style: none;
+            }
+            & .borders__value{
+                color: var(--fontColor);
+                background: var(--headerColor);
+                min-width: 100px;
+                height: 35px;
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+                transition: .5s;
+                text-decoration: none;
+            }
+        }
+    }
+}

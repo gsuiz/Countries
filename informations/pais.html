@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/breakpoints.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+
+        <h2>Where in the world?</h2>
+        <div class="swicth">
+            <input type="checkbox" class="swicth__checkbox" id="check">
+            <label for="check">
+                <div class="checkbox__button">
+                    <i class="fa-solid fa-sun button__icon"></i>
+                    <div class="button__circle"></div>
+                    <i class="fa-solid fa-moon button__icon"></i>
+                </div>
+            </label>  
+        </div>
+
+    </header>
+    <main class="main-two">
+
+        <a href="../" class="btn-back" id="back">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+
+        <section class="country-infor">
+            
+        </section>
+
+    </main>
+    <script>
+
+        if(localStorage.getItem("theme")){
+            document.querySelector("html").classList.add(localStorage.getItem("theme"))
+            document.querySelector(".button__circle").classList.toggle("changeMode")
+        }
+
+        const btnBack = document.querySelector("#back") 
+        let bordersItens
+
+        const check = document.querySelector("#check")
+
+        check.addEventListener("click", () => {
+            localStorage.getItem("theme") ? localStorage.removeItem("theme") : localStorage.setItem("theme","Dark-Mode")
+            document.querySelector(".button__circle").classList.toggle("changeMode")
+            document.querySelector("html").classList = localStorage.getItem("theme") || ""
+
+        })
+
+        const flag = document.querySelector(".country-infor__flag img")
+        const countryInfor = document.querySelector(".country-infor")
+        fetch("../data.json")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                if(window.location.search.includes(item.alpha2Code)){
+                    countryInfor.innerHTML = `
+                        <div class="country-infor__flag">
+                            <img src="${item.flag}">
+                        </div>
+                        <div class="country-infor__content">
+                            <h2>${item.name}</h2>
+                            <div class="content__list">
+                                <ul class="list__one">
+                                    <li><strong>Native Name:</strong> ${item.nativeName}</li>
+                                    <li><strong>Population:</strong> ${item.population.toLocaleString("pt")}</li>
+                                    <li><strong>Region:</strong> ${item.region}</li>
+                                    <li><strong>Sub Region:</strong> ${item.subregion}</li>
+                                    <li><strong>Capital:</strong> ${item.capital}</li>
+                                </ul>
+                                <ul class="list__two">
+                                    <li><strong>Top Level Domain:</strong> ${item.topLevelDomain[0]}</li>
+                                    <li><strong>Currencies:</strong> ${item.currencies[0].name}</li>
+                                    <li><strong>Languages:</strong> ${item.languages.reduce((acc,item) => [...acc,item.name] ,[]).join(", ")}</li>
+                                </ul>
+                            </div>
+                            <div class="content__borders">
+                                <p><strong>Border Countries:</strong></p>
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+
+                    if(item.borders ){
+                        item.borders.forEach(item => {
+                            document.querySelector(".content__borders ul").innerHTML += `
+                                <a href="" class="borders__value"><li>${item}</li></a>                    
+                            `
+                        })
+
+                        bordersItens = document.querySelectorAll(".borders__value")
+                        item.borders.forEach((name,index) => {
+                            const objBorder =  data.find(obj => obj.alpha3Code == name).alpha2Code
+                            bordersItens[index].href = `pais.html?c=${objBorder}`
+                        })
+
+                    }
+                }
+            })
+        }) 
+    </script>
+</body>
+</html>
